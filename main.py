@@ -1,3 +1,4 @@
+import pandas as pd
 from matplotlib import pyplot as plt
 
 from analysis import countAllWord
@@ -9,7 +10,10 @@ import numpy as np
 
 data = read_csv()
 report, cutstr = countAllWord(data)
-print(report)
+output = sorted(report.items(), key=lambda x:x[1], reverse=True)
+print(output)
+output_DF = pd.DataFrame(columns=["關鍵字", "出現字數"], data=output)
+output_DF.to_csv('output.csv', encoding='utf_8_sig')
 
 x, y = np.ogrid[:300, :300]
 mask = (x - 150) ** 2 + (y - 150) ** 2 > 130 ** 2
